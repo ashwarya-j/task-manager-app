@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json({ extended: false }));
 
 dotenv.config();
-//app.use('/api/auth', require('./routes/authRoutes'));
+app.use('/api/auth', require('./routes/authRoutes'));
 
 // Connect Database
 connectDB();
