@@ -8,6 +8,7 @@ app.use(express.json({ extended: false }));
 
 dotenv.config();
 app.use('/api/auth', require('./routes/authRoutes'));
+app.use('/api/tasks', require('./routes/taskRoutes'));
 
 // Connect Database
 connectDB();
