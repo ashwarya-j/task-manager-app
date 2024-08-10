@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { markTaskComplete } = require('../controllers/taskController');
 
 const taskSchema = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
@@ -9,5 +10,14 @@ const taskSchema = new mongoose.Schema({
     deadline: { type: Date },
     completed: { type: Boolean, default: false },
 });
+
+taskSchema.methods.markComplete = async function() {
+    this.completed = true;
+    await this.save();
+}
+
+taskSchema.statics.findByCategory = function(category) {
+    return this.find({ category });
+};
 
 module.exports = mongoose.model('Task', taskSchema);
